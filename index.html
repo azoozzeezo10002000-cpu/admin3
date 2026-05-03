@@ -11,10 +11,9 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body class="bg-slate-50 text-slate-900 overflow-x-hidden pb-16">
-    <!-- Passcode Screen -->
     <div id="passcode-screen" class="fixed inset-0 bg-slate-900 z-[100] flex flex-col items-center justify-center p-4">
-        <div class="mb-8">
-            <img src="./icon.png" alt="شعار النادي" class="w-32 h-32 object-contain" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMiI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAiLz48cGF0aCBkPSJNMTIgOGgudDAxIi8+PHBhdGggZD0iTTEyIDEyYTIgMiAwIDAgMSAyejEiLz48L3N2Zz4='">
+        <div class="mb-8 p-1 bg-white/10 rounded-full shadow-2xl">
+            <img src="./icon-512.png" alt="شعار النادي" class="w-32 h-32 object-cover rounded-full shadow-lg" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMiI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAiLz48cGF0aCBkPSJNMTIgOGgudDAxIi8+PHBhdGggZD0iTTEyIDEyYTIgMiAwIDAgMSAyejEiLz48L3N2Zz4='">
         </div>
         <h2 class="text-white text-2xl font-bold mb-6">الرجاء إدخال الرمز</h2>
         <div class="w-full max-w-xs">
@@ -23,16 +22,12 @@
         </div>
     </div>
 
-    <!-- Main App Container (Hidden initially via script if not authenticated) -->
     <div id="admin-app" class="flex flex-col min-h-screen relative max-w-md mx-auto bg-white shadow-xl hidden">
-        <!-- Top Header -->
         <header class="bg-white border-b border-slate-200 p-4 sticky top-0 z-10 shadow-sm flex items-center justify-center">
             <h2 class="text-xl font-bold text-slate-800">إدارة النادي</h2>
         </header>
 
-        <!-- Main Content -->
         <main class="flex-1 p-4 overflow-y-auto w-full">
-            <!-- Dashboard Section -->
             <section id="section-dashboard" class="block">
                 <h1 class="text-xl font-bold mb-4">الرئيسية</h1>
                 <div class="grid grid-cols-1 gap-4 mb-6">
@@ -71,7 +66,6 @@
                 </div>
             </section>
 
-            <!-- Players Section -->
             <section id="section-players" class="hidden pb-20">
                 <div class="flex flex-col gap-3 mb-6">
                     <h1 class="text-xl font-bold">إدارة اللاعبين</h1>
@@ -130,13 +124,11 @@
                             </tr>
                         </thead>
                         <tbody id="players-table" class="divide-y divide-slate-100 text-slate-700">
-                            <!-- JS Injection -->
-                        </tbody>
+                            </tbody>
                     </table>
                 </div>
             </section>
 
-            <!-- News Section -->
             <section id="section-news" class="hidden pb-20">
                  <div class="flex flex-col gap-3 mb-6">
                     <h1 class="text-xl font-bold">إدارة الأخبار</h1>
@@ -163,12 +155,10 @@
                 </div>
 
                 <div id="news-list" class="space-y-4">
-                    <!-- JS Injection -->
-                </div>
+                    </div>
             </section>
         </main>
         
-        <!-- Bottom Navigation -->
         <nav class="fixed bottom-0 w-full max-w-md bg-white border-t border-slate-200 h-16 flex items-center justify-around z-20 pb-safe shadow-[0_-4px_6px_-1px_rgb(0,0,0,0.05)]">
             <button onclick="showSection('dashboard')" class="flex flex-col items-center justify-center w-full h-full gap-1 nav-link text-blue-600 transition-colors" id="nav-dashboard">
                 <i data-lucide="home" class="w-6 h-6 nav-icon"></i>
@@ -195,7 +185,6 @@
       const passcodeInput = document.getElementById('admin-passcode');
       const passcodeError = document.getElementById('passcode-error');
 
-      // Check if already authenticated
       if (localStorage.getItem('admin_authenticated') === 'true') {
           passcodeScreen.classList.add('hidden');
           adminApp.classList.remove('hidden');
@@ -209,7 +198,6 @@
                   } else {
                       passcodeError.classList.remove('hidden');
                       e.target.value = '';
-                      // Optional: shake animation
                       passcodeInput.classList.add('animate-pulse');
                       setTimeout(() => passcodeInput.classList.remove('animate-pulse'), 500);
                   }
@@ -219,7 +207,6 @@
           });
       }
 
-        // Install Prompt Logic
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('./sw.js');
@@ -231,7 +218,7 @@
         installPrompt.innerHTML = `
         <div id="admin-install-prompt" class="fixed inset-0 bg-slate-900/80 z-[200] flex items-end sm:items-center justify-center p-4 transition-opacity">
             <div class="bg-white rounded-t-2xl sm:rounded-2xl w-full max-w-sm p-6 flex flex-col items-center text-center animate-slide-up transform transition-transform">
-                <img src="./icon.png" alt="شعار النادي" class="w-20 h-20 mb-4 object-contain" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMiI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAiLz48cGF0aCBkPSJNMTIgOGgudDAxIi8+PHBhdGggZD0iTTEyIDEyYTIgMiAwIDAgMSAyejEiLz48L3N2Zz4='">
+                <img src="./icon-512.png" alt="شعار النادي" class="w-24 h-24 mb-4 object-cover rounded-full shadow-md border-2 border-slate-100" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMiI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAiLz48cGF0aCBkPSJNMTIgOGgudDAxIi8+PHBhdGggZD0iTTEyIDEyYTIgMiAwIDAgMSAyejEiLz48L3N2Zz4='">
                 <h3 class="text-xl font-bold mb-2 text-slate-900">تثبيت تطبيق الإدارة</h3>
                 <p class="text-slate-500 text-sm mb-6">قم بتثبيت تطبيق إدارة النادي للوصول السريع والإدارة المستمرة.</p>
                 <div class="flex flex-col w-full gap-3">
