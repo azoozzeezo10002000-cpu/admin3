@@ -1,0 +1,16 @@
+{
+  "name": "إدارة الرجاء العراقي",
+  "short_name": "إدارة الرجاء",
+  "description": "تطبيق إدارة نادي الرجاء العراقي",
+  "start_url": "/admin2/index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#4f46e5",
+  "icons": [
+    {
+      "src": "./icon.png",
+      "sizes": "192x192 512x512",
+      "type": "image/png"
+    }
+  ]
+}
